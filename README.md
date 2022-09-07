@@ -2,12 +2,18 @@
 
 ## Install
 
-- Create a virtual environment:
-  `python -m venv venv`
-- Activate the virtual environment:
-  `source venv/bin/activate`
+- Create and activate the virtual environment:
+
+```sh
+$ python -m venv venv
+$ source ./venv/bin/activate
+```
+
 - Install dependencies:
-  `pip install -r ./requirements.txt`
+
+```sh
+$ pip install -r ./requirements.txt
+```
 
 ## How to run
 
