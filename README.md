@@ -12,18 +12,30 @@
 ## How to run
 
 - Start the RabbitMQ
-  `docker-compose -f docker-compose.yml up -d`
+
+```sh
+$ docker-compose -f docker-compose.yml up -d
+```
 
 - Subscribe to one of the queues (nse_queue | nyse_queue)
-  `./src/subscriber.py <QUEUE-NAME> nse.*`
-  `./src/subscriber.py nse_queue nse.*`
-  `./src/subscriber.py nyse_queue nyse.*`
+
+```sh
+$ ./src/subscriber.py <QUEUE-NAME> nse.*
+$ ./src/subscriber.py nse_queue nse.*
+$ ./src/subscriber.py nyse_queue nyse.*
+```
 
 - Publish
-  `./src/publisher.py`
+
+```sh
+$ ./src/producer.py
+```
 
 - Spin down the stack
-  `docker-compose -f docker-compose.yml down`
+
+```sh
+$ docker-compose -f docker-compose.yml down
+```
 
 ## References
 
