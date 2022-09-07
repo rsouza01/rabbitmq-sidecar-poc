@@ -46,3 +46,4 @@ $ docker-compose -f docker-compose.yml down
 ## References
 
 - https://medium.com/@rahulsamant_2674/python-rabbitmq-8c1c3b79ab3d
+- https://github.com/pika/pika/blob/0.12.0/examples/basic_consumer_threaded.py
