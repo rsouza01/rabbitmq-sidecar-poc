@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import pika
+import sys
 
 
 class Publisher:
@@ -29,12 +30,24 @@ class Publisher:
     def create_connection(self):
         """Create new connection"""
         param = pika.ConnectionParameters(
-            host=self.config['host'], port=self.config['port'])
+            host=self.config['host'], port=self.config['port'],
+            credentials=pika.PlainCredentials(
+                'myuser', 'mypassword')
+        )
         return pika.BlockingConnection(param)
 
 
 if __name__ == '__main__':
     publisher_config = {'host': 'localhost',
                         'port': 5672, 'exchange': 'my_exchange'}
-    publisher = Publisher(publisher_config)
-    publisher.publish('nse.nifty', 'New Data')
+
+    if len(sys.argv) < 2:
+        print('Usage: ' + __file__ + ' <QueueName > <TotalMessages>')
+        sys.exit()
+    else:
+        sub_queueName = sys.argv[1]
+        totalMessages = sys.argv[2]
+        publisher = Publisher(publisher_config)
+
+        for x in range(int(totalMessages)):
+            publisher.publish(sub_queueName, 'New Data')

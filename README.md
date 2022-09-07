@@ -34,7 +34,7 @@ $ ./src/subscriber.py nyse_queue nyse.*
 - Publish
 
 ```sh
-$ ./src/producer.py
+$ ./src/producer.py nse.nifty 10
 ```
 
 - Spin down the stack

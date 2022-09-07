@@ -2,6 +2,7 @@
 
 import pika
 import sys
+import time
 
 
 class Subscriber:
@@ -18,13 +19,17 @@ class Subscriber:
 
     def _create_connection(self):
         parameters = pika.ConnectionParameters(host=self.config['host'],
-                                               port=self.config['port'])
+                                               port=self.config['port'],
+                                               credentials=pika.PlainCredentials(
+            'myuser', 'mypassword'))
         return pika.BlockingConnection(parameters)
 
     def on_message_callback(self, channel, method, properties, body):
         """ Callback function """
         binding_key = method.routing_key
-        print("received new message for -" + binding_key)
+        print("Received new message for " +
+              binding_key + ", Body: " + str(body))
+        # time.sleep(3)
 
     def setup(self):
         """ Setup function """
@@ -54,7 +59,7 @@ if __name__ == '__main__':
     sub_config = {'host': 'localhost', 'port': 5672, 'exchange': 'my_exchange'}
 
     if len(sys.argv) < 2:
-        print('Usage: ' + __file__ + ' <QueueName > <BindingKey >')
+        print('Usage: ' + __file__ + ' <QueueName> <BindingKey>')
         sys.exit()
     else:
         sub_queueName = sys.argv[1]
